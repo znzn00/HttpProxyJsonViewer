@@ -1,0 +1,21 @@
+// $body-bg: #292929;
+
+@import 'bootstrap/scss/functions';
+@import 'bootstrap/scss/bootstrap.scss';
+$utilities: map-merge($utilities, 
+(
+    "height": map-merge(map-get($utilities, "height"),
+    (
+        "values": map-merge(map-get(map-get($utilities, "height"), "values"),
+        (
+            70: 70%,
+            30: 30%
+        ))
+    ))
+));
+
+@import 'bootstrap/scss/bootstrap.scss';
+
+html, body, #root {
+    height: 100%;
+}
