@@ -5,8 +5,20 @@ import { MakerDeb } from '@electron-forge/maker-deb';
 import { MakerRpm } from '@electron-forge/maker-rpm';
 import { VitePlugin } from '@electron-forge/plugin-vite';
 
+// const toPrune = [
+//   "^src$",
+//   "^tsconfig\\.json$",
+//   "^[^\\/\\\\]*\\.config\\.ts$",
+//   "^index\\.html$",
+//   "^package-lock\\.json$",
+//   "^\\.vscode$",
+//   "^\\.eslintrc\\.json$",
+//   "^\\.gitignore$"
+// ]
+
+var targets: string[] = [];
+
 const config: ForgeConfig = {
-  packagerConfig: {},
   rebuildConfig: {},
   makers: [new MakerSquirrel({
     authors: 'Zhen Peng Li Liang',
@@ -32,6 +44,26 @@ const config: ForgeConfig = {
       ]
     }),
   ],
+  packagerConfig: {
+    // afterCopy: [
+    // (buildPath: string, electronVersion: string, platform: string, arch: string) => {
+    //   const cwd = buildPath;
+    //   const targets = globSync("**/*", { cwd }).filter((e) => toPrune.some((r) => e.match(r)));
+    //   Promise.all(targets.map((target) => {
+    //     return fs.unlink(path.join(cwd, target), (err) => { });
+    //   }));
+    // }
+    // ],
+    ignore: [
+      /^\/src$/g,
+      /^\/tsconfig\.json$/g,
+      /^\/[^\/\\]*\.config\.ts$/g,
+      // /index\.html$/g,
+      /^\/\.vscode$/g,
+      /^\/\.eslintrc\.json$/g,
+      /^\/\.gitignore$/g
+    ]
+  }
 };
 
 export default config;
